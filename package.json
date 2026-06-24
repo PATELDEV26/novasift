@@ -59,6 +59,13 @@
         "from": "credentials.json.example",
         "to": "credentials.json.example"
       }
+    ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "PATELDEV26",
+        "repo": "novasift"
+      }
     ]
   }
 }
