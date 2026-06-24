@@ -1,0 +1,10 @@
+node_modules/
+out/
+release/
+dist/
+*.log
+.DS_Store
+credentials.json
+token.json
+.env
+.env.local

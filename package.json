@@ -1,0 +1,64 @@
+{
+  "name": "gmail-ai-organizer",
+  "version": "1.0.0",
+  "description": "AI-powered Gmail organizer desktop app",
+  "main": "out/main/index.js",
+  "scripts": {
+    "postinstall": "node node_modules/electron/install.js && electron-rebuild -f -w better-sqlite3",
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "pack": "npm run build && electron-builder --dir",
+    "dist": "npm run build && electron-builder"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.102.0",
+    "@google/generative-ai": "^0.24.1",
+    "@sentry/electron": "^7.13.0",
+    "better-sqlite3": "^11.7.0",
+    "electron-store": "^8.2.0",
+    "electron-updater": "^6.8.9",
+    "imapflow": "^1.3.7",
+    "lucide-react": "^1.17.0",
+    "mailparser": "^3.9.9",
+    "node-machine-id": "^1.1.12",
+    "nodemailer": "^8.0.10",
+    "openai": "^4.77.0"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.4",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/mailparser": "^3.4.6",
+    "@types/nodemailer": "^8.0.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "electron": "33.2.1",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "postcss": "^8.4.49",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11"
+  },
+  "build": {
+    "appId": "com.gmailai.organizer",
+    "productName": "NovaSift",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "credentials.json.example",
+        "to": "credentials.json.example"
+      }
+    ]
+  }
+}

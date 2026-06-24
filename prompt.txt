@@ -1,0 +1,340 @@
+# NovaSift Pre-Launch: Products Page + Legal Pages + Backend Deployment
+
+## Overview
+This prompt covers 4 things:
+1. Products page for thesidejob.tech
+2. Privacy Policy page
+3. Terms of Service page  
+4. Refund Policy page
+
+All pages should match the existing thesidejob.tech design system.
+If the site uses Next.js, create .tsx files in the /app or /pages directory.
+If it uses React with React Router, create .tsx components and add routes.
+Check the existing codebase structure first before creating any files.
+
+---
+
+## TASK 1: Products Page
+
+Create a new page at /products/novasift (or /novasift if cleaner).
+
+### Design Requirements
+- Match thesidejob.tech's existing dark theme and design system
+- Use the same fonts, colors, and component patterns already in the codebase
+- Mobile responsive
+- No placeholder content — use the real copy below
+
+### Page Sections (in order)
+
+#### Section 1 — Hero
+Headline: "Your Gmail, Finally Under Control"
+Subheadline: "NovaSift is an AI-powered desktop email client that runs 
+locally on your machine. Your emails never leave your computer."
+
+Two buttons side by side:
+- Primary: "Download for Windows" → links to #download section
+- Secondary: "Download for Mac" → links to #download section
+
+Small trust line below buttons:
+"Free forever · Pro from ₹249/month · Your data stays on your device"
+
+#### Section 2 — Problem/Solution (3 columns)
+Title: "Built different from every other email app"
+
+Column 1:
+Icon: Shield
+Title: "Privacy First"  
+Body: "BYOK model — bring your own AI key. NovaSift never sees 
+your emails. Everything runs locally on your machine."
+
+Column 2:
+Icon: Zap
+Title: "Actually Fast"
+Body: "Local SQLite database means instant search and offline 
+access. No waiting for servers. No spinners."
+
+Column 3:
+Icon: Brain
+Title: "Genuinely Intelligent"
+Body: "AI classifies, prioritizes, and summarizes your inbox 
+in the background. You only see what matters."
+
+#### Section 3 — Features (Free vs Pro)
+Title: "Everything you need. Nothing you don't."
+
+FREE TIER — ₹0 forever:
+- Smart AI Classification (Work, Personal, Finance, etc.)
+- Priority Levels (Critical, High, Medium, Low)
+- Focus Mode — hide everything except what matters
+- Sender Rules Engine
+- Local SQLite — instant search, works offline
+- Command Center Dashboard
+
+PRO TIER — ₹249/month or Lifetime:
+Everything in Free, plus:
+- AI Thread Summarizer & TL;DR
+- Follow-up Reminders — never miss a reply
+- Smart Newsletter Manager with 1-click unsubscribe
+- AI Smart Auto-Drafts
+- Auto-Archive for low-priority categories
+- Daily Briefing Digest
+
+#### Section 4 — Pricing
+Title: "Simple pricing"
+
+Card 1 — Free:
+Price: ₹0 / forever
+Button: "Download Free" → #download
+
+Card 2 — Pro Monthly (highlight this one as "Most Popular"):
+Price: ₹249 / month
+Button: "Get Pro" → #download (payment happens inside the app)
+
+Card 3 — Pro Lifetime:
+Price: ₹2499 / once
+Subtext: "Pay once, own forever"
+Button: "Get Lifetime" → #download
+
+Add note: "Payments secured by Razorpay. Refund policy applies."
+
+#### Section 5 — Download (id="download")
+Title: "Download NovaSift"
+Subtext: "Free to download. Pro features unlock inside the app."
+
+Two download buttons:
+- "Download for Windows (.exe)" 
+  → href="https://github.com/PATELDEV26/novasift/releases/latest/download/NovaSift-Setup.exe"
+- "Download for Mac (.dmg)"
+  → href="https://github.com/PATELDEV26/novasift/releases/latest/download/NovaSift.dmg"
+
+Note below: "Version 1.0.0 · Windows 10+ and macOS 11+ supported"
+
+Also add a "Enter License Key" note:
+"Already purchased Pro? Download the app and activate your 
+license key from Settings → License inside the app."
+
+#### Section 6 — FAQ
+Title: "Common questions"
+
+Q: Is my email data safe?
+A: Yes. NovaSift runs entirely on your machine. Your emails are 
+fetched via IMAP directly to a local database. The only data that 
+leaves your machine is what you send to your chosen AI provider 
+(OpenAI, Gemini, etc.) using your own API key — we never see it.
+
+Q: What AI providers are supported?
+A: OpenAI, Anthropic (Claude), Google Gemini, Groq, and NVIDIA NIM. 
+You bring your own API key, so you're always in control of costs.
+
+Q: How does the Pro license work?
+A: After payment, you receive a license key via email. Open NovaSift, 
+go to Settings → License, paste your key, and Pro features unlock 
+instantly. One license works on up to 2 devices.
+
+Q: Can I get a refund?
+A: Yes. We offer a 7-day refund on monthly plans if you're not 
+satisfied. Lifetime purchases are non-refundable after 14 days. 
+See our refund policy for details.
+
+Q: Does it work on Windows and Mac?
+A: Yes. NovaSift is built with Electron and supports Windows 10+ 
+and macOS 11+. Linux support is planned for a future release.
+
+#### Section 7 — Footer links
+Add links to:
+- Privacy Policy → /privacy
+- Terms of Service → /terms  
+- Refund Policy → /refund
+- Support: support@thesidejob.tech
+
+---
+
+## TASK 2: Privacy Policy Page
+
+Create page at /privacy
+
+Title: "Privacy Policy"
+Last updated: June 2026
+Company: The Side Job (thesidejob.tech)
+
+Content:
+
+### 1. Introduction
+NovaSift is a product of The Side Job (thesidejob.tech). This 
+Privacy Policy explains how we handle your information when you 
+use NovaSift, our AI-powered desktop email client.
+
+### 2. Data We Do NOT Collect
+NovaSift is built on a local-first, privacy-first architecture:
+- We do not collect, store, or process your emails
+- We do not store your Gmail credentials on our servers
+- We do not log your AI API keys
+- We do not track your email content or usage patterns
+- Your email data never passes through our servers
+
+### 3. Data We DO Collect
+We collect only what's necessary to operate the license system:
+- Your email address (provided at purchase, for license delivery)
+- Your payment information (processed by Razorpay — we never 
+  see your card details)
+- Your license key and activation status (stored in our database 
+  to validate Pro features)
+- Basic crash reports via Sentry (anonymous, no email content)
+
+### 4. How Your Email Data Works
+NovaSift connects directly to Gmail via IMAP using credentials 
+stored only on your local machine. Emails are stored in a local 
+SQLite database on your device. AI processing uses your own API 
+key sent directly to your chosen provider (OpenAI, Google, etc.) 
+— The Side Job is never an intermediary.
+
+### 5. Third-Party Services
+- Razorpay: Payment processing (see razorpay.com/privacy)
+- Resend: License key email delivery
+- Sentry: Anonymous crash reporting
+- Your chosen AI provider: Email analysis (using your own key)
+
+### 6. Data Retention
+License records are retained for as long as your account is active. 
+You may request deletion by emailing support@thesidejob.tech.
+
+### 7. Your Rights
+You have the right to access, correct, or delete your personal 
+data. Contact us at support@thesidejob.tech for any requests.
+
+### 8. Contact
+The Side Job · support@thesidejob.tech · thesidejob.tech
+
+---
+
+## TASK 3: Terms of Service Page
+
+Create page at /terms
+
+Title: "Terms of Service"
+Last updated: June 2026
+
+Content:
+
+### 1. Acceptance
+By downloading or using NovaSift, you agree to these Terms. 
+If you disagree, do not use the software.
+
+### 2. License
+NovaSift grants you a non-exclusive, non-transferable license 
+to use the software on up to 2 devices per license key. You may 
+not resell, sublicense, or distribute the software.
+
+### 3. Pro Subscription
+Pro features require a valid license key. Monthly subscriptions 
+auto-renew at ₹249/month until cancelled. Lifetime licenses are 
+a one-time purchase with no recurring charges.
+
+### 4. Acceptable Use
+You agree not to:
+- Reverse engineer, decompile, or modify the software
+- Share your license key with others
+- Use the software for any unlawful purpose
+- Attempt to circumvent the license validation system
+
+### 5. BYOK (Bring Your Own Key)
+NovaSift requires you to provide your own AI API keys. You are 
+responsible for any costs incurred with your AI provider. The 
+Side Job is not responsible for AI provider charges.
+
+### 6. Disclaimer
+NovaSift is provided "as is" without warranty. We do not guarantee 
+uninterrupted service or compatibility with all Gmail configurations.
+
+### 7. Limitation of Liability
+The Side Job's liability is limited to the amount you paid for 
+the software in the 3 months preceding any claim.
+
+### 8. Termination
+We may terminate your license if you violate these Terms. 
+Upon termination, you must stop using the software.
+
+### 9. Governing Law
+These Terms are governed by the laws of India.
+
+### 10. Contact
+support@thesidejob.tech · thesidejob.tech
+
+---
+
+## TASK 4: Refund Policy Page
+
+Create page at /refund
+
+Title: "Refund Policy"
+Last updated: June 2026
+
+Content:
+
+### Our Policy
+We want you to be happy with NovaSift. Here's our refund policy:
+
+**Monthly Subscriptions (₹249/month)**
+- Full refund within 7 days of first payment, no questions asked
+- To request: email support@thesidejob.tech with your order ID
+- Refunds processed within 5-7 business days via Razorpay
+
+**Lifetime License (₹2499)**
+- Full refund within 14 days of purchase if you're not satisfied
+- After 14 days: no refund (you own the license permanently)
+- To request: email support@thesidejob.tech with your license key
+
+**What We Cannot Refund**
+- Subscriptions cancelled after the 7-day window
+- Lifetime licenses after 14 days
+- Partial months of subscription usage
+
+**How to Request**
+Email support@thesidejob.tech with:
+1. Your purchase email address
+2. Your Razorpay payment ID or license key
+3. Reason for refund (optional but helpful)
+
+We'll respond within 1 business day.
+
+---
+
+## TASK 5: Add Navigation Links
+
+In the existing thesidejob.tech navigation/header, add:
+- "Products" link → /products/novasift
+  (or a dropdown if there will be multiple products later)
+
+In the footer, add links to:
+- Privacy Policy → /privacy
+- Terms of Service → /terms
+- Refund Policy → /refund
+
+---
+
+## TASK 6: Add Route Entries
+
+Register all new routes in the app:
+- /products/novasift (or /novasift)
+- /privacy
+- /terms
+- /refund
+
+For Next.js: create the appropriate files in /app or /pages directory
+For React Router: add <Route> entries in the router config
+
+---
+
+## Important Notes for Agent
+
+1. Check the existing codebase structure FIRST before creating files
+2. Match the exact color scheme, fonts, and component style 
+   already used in thesidejob.tech — don't introduce new design tokens
+3. The GitHub release URLs for downloads are placeholders — 
+   replace with actual URLs once builds are published to GitHub Releases
+4. All pages must be mobile responsive
+5. Add proper <title> and meta description tags to each page for SEO:
+   - Products: "NovaSift — AI-Powered Gmail Desktop Client | The Side Job"
+   - Privacy: "Privacy Policy | NovaSift"
+   - Terms: "Terms of Service | NovaSift"
+   - Refund: "Refund Policy | NovaSift"
