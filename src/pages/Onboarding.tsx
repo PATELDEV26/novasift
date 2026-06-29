@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import logoUrl from '../assets/logo.png'
 
 interface OnboardingProps {
   onConnect: () => Promise<void>
@@ -28,10 +29,8 @@ export function Onboarding({ onConnect, connecting, error }: OnboardingProps) {
 
       <div className="relative z-10 max-w-lg w-full px-6 animate-fade-in">
         <div className="text-center mb-10 animate-slide-up">
-          <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(99,102,241,0.2)] backdrop-blur-xl">
-            <svg className="w-10 h-10 text-indigo-400 drop-shadow-[0_0_10px_rgba(99,102,241,0.5)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
+          <div className="w-20 h-20 mx-auto mb-6 rounded-3xl shadow-[0_0_40px_rgba(99,102,241,0.2)]">
+            <img src={logoUrl} alt="NovaSift Logo" className="w-full h-full object-cover rounded-3xl" />
           </div>
           <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-4 tracking-tight">
             NovaSift
