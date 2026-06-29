@@ -15,13 +15,19 @@ export async function connectGmail(): Promise<{ success: boolean; error?: string
     const { email_address, app_password } = getSettings()
     if (!email_address || !app_password) return { success: false, error: 'Missing credentials' }
     
+    const cleanPassword = app_password.replace(/\s+/g, '')
     imapClient = new ImapFlow({
       host: 'imap.gmail.com',
       port: 993,
       secure: true,
-      auth: { user: email_address, pass: app_password },
+      auth: { user: email_address, pass: cleanPassword },
       logger: false
     })
+    
+    imapClient.on('error', (err) => {
+      console.error('ImapFlow error:', err)
+    })
+    
     await imapClient.connect()
     return { success: true }
   } catch (err) {

@@ -44,7 +44,7 @@ export function Onboarding({ onConnect, connecting, error }: OnboardingProps) {
           <div>
             <input
               type="password"
-              placeholder="App Password"
+              placeholder="App Password (with or without spaces)"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full bg-surface-raised border border-surface-border rounded-lg px-4 py-3 text-sm text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all"
@@ -71,7 +71,7 @@ export function Onboarding({ onConnect, connecting, error }: OnboardingProps) {
           <div>
             <p className="font-semibold text-gray-200 mb-1">What is an App Password?</p>
             <p className="text-gray-400 leading-relaxed">
-              An App Password is a 16-digit passcode that gives a non-Google app permission to access your Google Account.
+              An App Password is a 16-digit passcode (with or without spaces) that gives a non-Google app permission to access your Google Account.
             </p>
           </div>
           

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { LayoutDashboard, Inbox, Shield, Settings2, TerminalSquare, Newspaper } from 'lucide-react'
+import { LayoutDashboard, Inbox, Shield, Settings2, TerminalSquare, Newspaper, LogOut } from 'lucide-react'
 import type { Category, Importance, SyncStatus } from '../../electron/shared/types'
 import { DEFAULT_CATEGORY_LABELS, IMPORTANCE_LABELS, getCategoryLabels } from '../../electron/shared/types'
 import type { Page } from '../App'
@@ -46,6 +46,11 @@ export function Sidebar({
   }, [])
 
   const categoryFilters = Object.entries(labels) as [Category, string][]
+
+  const handleLogout = async () => {
+    await window.api.gmail.disconnect()
+    window.location.reload()
+  }
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -210,22 +215,31 @@ export function Sidebar({
         </div>
         
         {email && (
-          <button 
-            onClick={() => onPageChange('upgrade')}
-            className="w-full flex items-center justify-between mt-1 pt-3 border-t border-surface-border/50 hover:bg-surface-hover/50 p-2 -mx-2 rounded-lg transition-colors cursor-pointer text-left"
-            title="View Free & Premium Features"
-          >
-            <span className="text-xs font-medium text-gray-400 truncate max-w-[140px]" title={email}>{email}</span>
-            {isPro ? (
-              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-gradient-to-r from-amber-500/20 to-yellow-500/20 text-amber-400 border border-amber-500/30 shadow-[0_0_10px_rgba(245,158,11,0.2)] flex items-center gap-1">
-                PRO 👑
-              </span>
-            ) : (
-              <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-surface text-gray-500 border border-surface-border group-hover:border-indigo-500/50 transition-colors">
-                FREE
-              </span>
-            )}
-          </button>
+          <div className="mt-1 pt-3 border-t border-surface-border/50 flex items-center justify-between gap-2">
+            <button 
+              onClick={() => onPageChange('upgrade')}
+              className="flex-1 flex items-center justify-between hover:bg-surface-hover/50 p-2 -mx-2 rounded-lg transition-colors cursor-pointer text-left overflow-hidden"
+              title="View Free & Premium Features"
+            >
+              <span className="text-xs font-medium text-gray-400 truncate max-w-[120px]" title={email}>{email}</span>
+              {isPro ? (
+                <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-gradient-to-r from-amber-500/20 to-yellow-500/20 text-amber-400 border border-amber-500/30 shadow-[0_0_10px_rgba(245,158,11,0.2)] flex items-center gap-1 shrink-0">
+                  PRO 👑
+                </span>
+              ) : (
+                <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-surface text-gray-500 border border-surface-border group-hover:border-indigo-500/50 transition-colors shrink-0">
+                  FREE
+                </span>
+              )}
+            </button>
+            <button 
+              onClick={handleLogout}
+              className="p-1.5 text-gray-500 hover:text-red-400 hover:bg-red-500/10 rounded-md transition-colors shrink-0"
+              title="Log Out"
+            >
+              <LogOut size={14} />
+            </button>
+          </div>
         )}
       </div>
     </aside>
