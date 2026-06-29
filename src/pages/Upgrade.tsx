@@ -26,7 +26,7 @@ export function Upgrade({ isPro, email, onSaveSuccess, showToast, onNavigate }: 
     }
     setSubscribeLoading(true)
     try {
-      const response = await fetch('http://localhost:3000/api/create-subscription', {
+      const response = await fetch('https://thesidejob.tech/api/create-subscription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: subscribeEmail.trim() })
@@ -70,7 +70,7 @@ export function Upgrade({ isPro, email, onSaveSuccess, showToast, onNavigate }: 
   const handleResend = async () => {
     setResendLoading(true)
     try {
-      await fetch('http://localhost:3000/api/resend-license', {
+      await fetch('https://thesidejob.tech/api/resend-license', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: subscribeEmail.trim() })
