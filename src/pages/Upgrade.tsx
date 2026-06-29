@@ -12,75 +12,8 @@ interface UpgradeProps {
 export function Upgrade({ isPro, email, onSaveSuccess, showToast, onNavigate }: UpgradeProps) {
   const [licenseKey, setLicenseKey] = useState('')
   const [loading, setLoading] = useState(false)
-  const [subscribeEmail, setSubscribeEmail] = useState(email || '')
-  const [subscribeLoading, setSubscribeLoading] = useState(false)
-  const [paymentSuccess, setPaymentSuccess] = useState(false)
-  const [resendLoading, setResendLoading] = useState(false)
-  const [resendSuccess, setResendSuccess] = useState(false)
-  const isAdmin = email === 'removed_admin@gmail.com'
-
-  const handleSubscribe = async () => {
-    if (!subscribeEmail.trim()) {
-      showToast('Please enter an email address', 'error')
-      return
-    }
-    setSubscribeLoading(true)
-    try {
-      const response = await fetch('https://thesidejob.tech/api/create-subscription', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: subscribeEmail.trim() })
-      })
-      
-      if (!response.ok) throw new Error('Failed to create subscription')
-      
-      const { subscription_id, key_id } = await response.json()
-      
-      const options = {
-        key: key_id,
-        subscription_id: subscription_id,
-        name: 'NovaSift',
-        description: 'Pro Monthly Subscription',
-        image: 'https://thesidejob.tech/novasift-logo.png',
-        prefill: { email: subscribeEmail.trim() },
-        theme: { color: '#6366f1' },
-        handler: function (response: any) {
-          setPaymentSuccess(true)
-        },
-        modal: {
-          ondismiss: function() {
-            setSubscribeLoading(false)
-          }
-        }
-      }
-      
-      const rzp = new (window as any).Razorpay(options)
-      rzp.on('payment.failed', function (response: any) {
-         showToast('Payment failed', 'error')
-         setSubscribeLoading(false)
-      })
-      rzp.open()
-    } catch (err) {
-      console.error(err)
-      showToast('Error: ' + (err instanceof Error ? err.message : String(err)), 'error')
-      setSubscribeLoading(false)
-    }
-  }
-
-  const handleResend = async () => {
-    setResendLoading(true)
-    try {
-      await fetch('https://thesidejob.tech/api/resend-license', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: subscribeEmail.trim() })
-      })
-      setResendSuccess(true)
-      showToast('Email sent again!', 'success')
-    } catch (e) {
-      showToast('Failed to resend email', 'error')
-    }
-    setResendLoading(false)
+  const handleSubscribe = () => {
+    window.api.openExternal('https://thesidejob.tech/products/novasift#pricing')
   }
 
   const handleActivate = async () => {
@@ -176,53 +109,17 @@ export function Upgrade({ isPro, email, onSaveSuccess, showToast, onNavigate }: 
                 <button disabled className="w-full py-3 px-4 bg-gradient-to-r from-amber-500/20 to-yellow-500/20 border border-amber-500/30 rounded-lg text-sm font-bold text-amber-400 mb-8 cursor-default flex items-center justify-center gap-2">
                   <CheckCircle2 size={18} /> Pro License Active
                 </button>
-              ) : paymentSuccess ? (
-                <div className="mb-8 p-6 bg-surface border border-surface-border rounded-xl text-center">
-                  <div className="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle2 size={24} />
-                  </div>
-                  <h4 className="text-lg font-bold text-white mb-2">🎉 Payment Successful!</h4>
-                  <p className="text-sm text-gray-400 mb-4">
-                    We've sent your Pro license key to <strong className="text-white">{subscribeEmail}</strong>.<br/>
-                    Check your inbox (and spam folder). Key arriving via email within 1-2 minutes.
-                  </p>
-                  
-                  <div className="space-y-3">
-                    <button
-                      onClick={() => setPaymentSuccess(false)}
-                      className="w-full py-2.5 px-4 bg-accent hover:bg-accent-muted text-white rounded-lg text-sm font-bold shadow-sm transition-all"
-                    >
-                      Enter License Key
-                    </button>
-                    <button
-                      onClick={handleResend}
-                      disabled={resendLoading || resendSuccess}
-                      className="w-full py-2 px-4 bg-transparent border border-surface-border hover:bg-surface-hover text-gray-300 rounded-lg text-xs font-medium transition-all disabled:opacity-50"
-                    >
-                      {resendLoading ? 'Sending...' : resendSuccess ? 'Sent!' : "Didn't receive it? Resend Email"}
-                    </button>
-                  </div>
-                </div>
               ) : (
                 <div className="mb-8 space-y-6">
                   {/* Subscribe Section */}
                   <div className="space-y-3">
-                    <div className="relative">
-                      <input
-                        type="email"
-                        placeholder="Your Email Address"
-                        value={subscribeEmail}
-                        onChange={(e) => setSubscribeEmail(e.target.value)}
-                        className="w-full bg-surface border border-surface-border rounded-lg px-4 py-3 text-sm text-white focus:border-white focus:ring-1 focus:ring-white outline-none transition-all placeholder:text-gray-600"
-                      />
-                    </div>
                     <button
                       onClick={handleSubscribe}
-                      disabled={subscribeLoading || !subscribeEmail.trim()}
-                      className="w-full py-3 px-4 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-400 hover:to-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-sm font-bold shadow-sm transition-all flex items-center justify-center gap-2 text-white"
+                      className="w-full py-3 px-4 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-400 hover:to-indigo-500 rounded-lg text-sm font-bold shadow-sm transition-all flex items-center justify-center gap-2 text-white"
                     >
-                      {subscribeLoading ? 'Opening Checkout...' : 'Subscribe Now'} <ArrowRight size={16} />
+                      Subscribe on Website <ArrowRight size={16} />
                     </button>
+                    <p className="text-xs text-gray-500 text-center">Get your license key instantly via email.</p>
                   </div>
 
                   <div className="relative flex items-center py-2">
