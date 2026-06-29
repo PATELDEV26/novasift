@@ -18,85 +18,99 @@ export function Onboarding({ onConnect, connecting, error }: OnboardingProps) {
   }
 
   return (
-    <div className="flex-1 flex items-center justify-center p-8">
-      <div className="max-w-md w-full text-center">
-        <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-accent/20 flex items-center justify-center">
-          <svg className="w-8 h-8 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
+    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#09090b]">
+      {/* Animated Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute -top-[40%] -left-[10%] w-[70%] h-[70%] rounded-full bg-indigo-500/20 blur-[120px] mix-blend-screen animate-pulse-slow"></div>
+        <div className="absolute top-[20%] -right-[20%] w-[60%] h-[60%] rounded-full bg-fuchsia-500/20 blur-[120px] mix-blend-screen animate-float"></div>
+        <div className="absolute -bottom-[40%] left-[20%] w-[80%] h-[80%] rounded-full bg-blue-500/10 blur-[120px] mix-blend-screen animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+      </div>
+
+      <div className="relative z-10 max-w-lg w-full px-6 animate-fade-in">
+        <div className="text-center mb-10 animate-slide-up">
+          <div className="w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(99,102,241,0.2)] backdrop-blur-xl">
+            <svg className="w-10 h-10 text-indigo-400 drop-shadow-[0_0_10px_rgba(99,102,241,0.5)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-4 tracking-tight">
+            NovaSift
+          </h1>
+          <p className="text-gray-400 text-sm leading-relaxed max-w-sm mx-auto">
+            Experience the future of email triage. Securely connect your Gmail account and let AI organize your inbox locally.
+          </p>
         </div>
-        <h2 className="text-2xl font-semibold text-white mb-2">Welcome to NovaSift</h2>
-        <p className="text-gray-400 mb-8 text-sm leading-relaxed">
-          Connect your Gmail account via IMAP to securely sync and classify your emails entirely locally.
-        </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4 mb-6">
-          <div>
-            <input
-              type="email"
-              placeholder="Email Address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-surface-raised border border-surface-border rounded-lg px-4 py-3 text-sm text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all"
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="App Password (with or without spaces)"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-surface-raised border border-surface-border rounded-lg px-4 py-3 text-sm text-white focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-all"
-              required
-            />
-          </div>
-
-          {error && (
-            <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm text-left">
-              {error}
+        <div className="bg-surface-raised/40 backdrop-blur-2xl border border-surface-border/50 shadow-glass rounded-3xl p-8 mb-6 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider pl-1">Google Account</label>
+              <input
+                type="email"
+                placeholder="name@gmail.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-black/40 border border-surface-border/50 rounded-xl px-4 py-3.5 text-sm text-white focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 focus:bg-indigo-500/5 outline-none transition-all placeholder:text-gray-600 shadow-inner"
+                required
+              />
             </div>
-          )}
+            <div className="space-y-1">
+              <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider pl-1">App Password</label>
+              <input
+                type="password"
+                placeholder="16-digit app password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full bg-black/40 border border-surface-border/50 rounded-xl px-4 py-3.5 text-sm text-white focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 focus:bg-indigo-500/5 outline-none transition-all placeholder:text-gray-600 shadow-inner"
+                required
+              />
+            </div>
 
+            {error && (
+              <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm flex items-start gap-3 shadow-lg">
+                <svg className="w-5 h-5 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                <span>{error}</span>
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={connecting || !email || !password}
+              className="w-full py-4 px-6 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500 rounded-xl text-white font-bold shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] disabled:opacity-50 disabled:hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] disabled:cursor-not-allowed transition-all transform hover:-translate-y-0.5 active:translate-y-0 mt-2"
+            >
+              {connecting ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                  Connecting...
+                </span>
+              ) : 'Connect Inbox'}
+            </button>
+          </form>
+        </div>
+
+        <div className="flex flex-col gap-3 animate-slide-up" style={{ animationDelay: '0.2s' }}>
           <button
-            type="submit"
-            disabled={connecting || !email || !password}
-            className="w-full py-3 px-6 bg-accent hover:bg-accent-muted rounded-lg text-white font-medium disabled:opacity-50 transition-colors"
+            type="button"
+            onClick={() => window.api.openExternal('https://myaccount.google.com/signinoptions/two-step-verification')}
+            className="flex items-center justify-between w-full px-5 py-3.5 bg-surface-raised/30 backdrop-blur-md border border-surface-border/50 hover:bg-surface-raised/60 hover:border-surface-border rounded-xl text-gray-300 transition-all font-medium group shadow-glass-sm"
           >
-            {connecting ? 'Connecting...' : 'Connect Mailbox'}
+            <span className="flex items-center gap-3">
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-500/20 text-indigo-400 text-xs font-bold group-hover:bg-indigo-500 group-hover:text-white transition-colors">1</span>
+              Turn on 2-Step Verification
+            </span>
+            <svg className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
           </button>
-        </form>
-
-        <div className="text-left bg-surface-raised/50 border border-surface-border backdrop-blur-md shadow-glass-sm rounded-xl p-5 text-sm flex flex-col gap-4">
-          <div>
-            <p className="font-semibold text-gray-200 mb-1">What is an App Password?</p>
-            <p className="text-gray-400 leading-relaxed">
-              An App Password is a 16-digit passcode (with or without spaces) that gives a non-Google app permission to access your Google Account.
-            </p>
-          </div>
-          
-          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3">
-            <p className="text-amber-200/90 font-medium leading-relaxed">⚠️ Important: Google requires 2-Step Verification to be turned ON before you can generate an App Password.</p>
-          </div>
-
-          <div className="flex flex-col gap-2 mt-1">
-            <button
-              type="button"
-              onClick={() => window.api.openExternal('https://myaccount.google.com/signinoptions/two-step-verification')}
-              className="flex items-center justify-between w-full px-4 py-2.5 bg-surface border border-surface-border hover:bg-surface-hover rounded-lg text-gray-300 transition-colors font-medium group"
-            >
-              <span>Step 1: Turn on 2-Step Verification</span>
-              <svg className="w-4 h-4 text-gray-500 group-hover:text-gray-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-            </button>
-            <button
-              type="button"
-              onClick={() => window.api.openExternal('https://myaccount.google.com/apppasswords')}
-              className="flex items-center justify-between w-full px-4 py-2.5 bg-surface border border-surface-border hover:bg-surface-hover rounded-lg text-gray-300 transition-colors font-medium group"
-            >
-              <span>Step 2: Generate App Password</span>
-              <svg className="w-4 h-4 text-gray-500 group-hover:text-gray-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => window.api.openExternal('https://myaccount.google.com/apppasswords')}
+            className="flex items-center justify-between w-full px-5 py-3.5 bg-surface-raised/30 backdrop-blur-md border border-surface-border/50 hover:bg-surface-raised/60 hover:border-surface-border rounded-xl text-gray-300 transition-all font-medium group shadow-glass-sm"
+          >
+            <span className="flex items-center gap-3">
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-indigo-500/20 text-indigo-400 text-xs font-bold group-hover:bg-indigo-500 group-hover:text-white transition-colors">2</span>
+              Generate App Password
+            </span>
+            <svg className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+          </button>
         </div>
       </div>
     </div>

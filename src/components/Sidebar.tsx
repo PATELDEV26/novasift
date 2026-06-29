@@ -62,11 +62,15 @@ export function Sidebar({
   ] as const
 
   return (
-    <aside className="w-64 flex-shrink-0 bg-surface-raised/50 backdrop-blur-md border-r border-surface-border flex flex-col h-full">
-      <div className="p-5 border-b border-surface-border flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded bg-accent flex items-center justify-center text-white font-bold text-xs shadow-glass-sm">N</div>
-          <h1 className="text-sm font-semibold text-white tracking-wide">NovaSift</h1>
+    <aside className="w-64 flex-shrink-0 bg-surface-raised/40 backdrop-blur-2xl border-r border-surface-border/50 flex flex-col h-full shadow-[4px_0_24px_rgba(0,0,0,0.2)] z-20">
+      <div className="p-6 flex items-center justify-between border-b border-surface-border/30">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold shadow-[0_0_15px_rgba(99,102,241,0.4)]">
+            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+          </div>
+          <h1 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 tracking-tight">NovaSift</h1>
         </div>
       </div>
 
@@ -78,11 +82,13 @@ export function Sidebar({
             <button
               key={item.id}
               onClick={() => onPageChange(item.id)}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                isActive ? 'bg-accent/10 text-accent' : 'text-gray-400 hover:text-gray-200 hover:bg-surface-hover'
+              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                isActive 
+                  ? 'bg-indigo-500/15 text-indigo-400 shadow-inner border border-indigo-500/20' 
+                  : 'text-gray-400 hover:text-gray-200 hover:bg-white/5 border border-transparent'
               }`}
             >
-              <Icon size={16} />
+              <Icon size={18} className={isActive ? 'text-indigo-400 drop-shadow-[0_0_8px_rgba(99,102,241,0.5)]' : 'text-gray-500'} />
               {item.label}
             </button>
           )

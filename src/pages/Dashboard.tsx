@@ -38,8 +38,11 @@ export function Dashboard({ onNavigate, onSelectMessage, isPro, email }: { onNav
   }, [])
 
   return (
-    <div className="flex-1 overflow-y-auto p-8 bg-surface">
-      <div className="max-w-5xl mx-auto">
+    <div className="flex-1 overflow-y-auto p-8 bg-[#09090b] relative">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-[20%] w-[60%] h-64 bg-indigo-500/10 blur-[100px] pointer-events-none rounded-full"></div>
+      
+      <div className="max-w-5xl mx-auto relative z-10">
         {!isPro && email !== 'removed_admin@gmail.com' && showSpotlight && (
           <div className="mb-8 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-xl p-4 flex items-start sm:items-center justify-between gap-4 shadow-glass-sm animate-in slide-in-from-top-4 fade-in duration-500">
             <div className="flex items-center gap-3">
@@ -59,57 +62,54 @@ export function Dashboard({ onNavigate, onSelectMessage, isPro, email }: { onNav
           </div>
         )}
 
-        <h2 className="text-2xl font-semibold text-white mb-8 tracking-tight">Command Center</h2>
+        <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-8 tracking-tight">Command Center</h2>
         
         <div className={`grid grid-cols-1 md:grid-cols-${isPro ? '4' : '3'} gap-6 mb-10`}>
-          <div className="bg-surface-raised border border-surface-border rounded-xl p-6 shadow-glass-sm flex flex-col justify-between relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-              <Activity size={48} className="text-accent" />
+          <div className="bg-black/40 backdrop-blur-xl border border-surface-border/50 rounded-2xl p-6 shadow-glass-sm flex flex-col justify-between relative overflow-hidden group hover:border-indigo-500/30 transition-all hover:shadow-[0_8px_30px_rgba(99,102,241,0.1)]">
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-500">
+              <Activity size={48} className="text-indigo-400" />
             </div>
-            <h3 className="text-sm font-medium text-gray-400">AI Processed (24h)</h3>
-            <p className="text-4xl font-semibold text-white mt-4">{stats.processed24h}</p>
+            <h3 className="text-sm font-semibold text-gray-400 tracking-wide uppercase">AI Processed (24h)</h3>
+            <p className="text-5xl font-bold text-white mt-6 tracking-tight">{stats.processed24h}</p>
           </div>
           
-          <div className="bg-surface-raised border border-surface-border rounded-xl p-6 shadow-glass-sm flex flex-col justify-between relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-              <ShieldAlert size={48} className="text-indigo-400" />
+          <div className="bg-black/40 backdrop-blur-xl border border-surface-border/50 rounded-2xl p-6 shadow-glass-sm flex flex-col justify-between relative overflow-hidden group hover:border-purple-500/30 transition-all hover:shadow-[0_8px_30px_rgba(168,85,247,0.1)]">
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-500">
+              <ShieldAlert size={48} className="text-purple-400" />
             </div>
-            <h3 className="text-sm font-medium text-gray-400">Actions Required</h3>
-            <p className="text-4xl font-semibold text-white mt-4">{stats.actionsRequired}</p>
+            <h3 className="text-sm font-semibold text-gray-400 tracking-wide uppercase">Actions Required</h3>
+            <p className="text-5xl font-bold text-white mt-6 tracking-tight">{stats.actionsRequired}</p>
           </div>
 
-          <div className="bg-surface-raised border border-surface-border rounded-xl p-6 shadow-glass-sm flex flex-col justify-between relative overflow-hidden group">
-            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+          <div className="bg-black/40 backdrop-blur-xl border border-surface-border/50 rounded-2xl p-6 shadow-glass-sm flex flex-col justify-between relative overflow-hidden group hover:border-emerald-500/30 transition-all hover:shadow-[0_8px_30px_rgba(16,185,129,0.1)]">
+            <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-500">
               <Mail size={48} className="text-emerald-400" />
             </div>
-            <h3 className="text-sm font-medium text-gray-400">Newsletters Bypassed</h3>
-            <p className="text-4xl font-semibold text-white mt-4">{stats.newslettersBypassed}</p>
+            <h3 className="text-sm font-semibold text-gray-400 tracking-wide uppercase">Newsletters Bypassed</h3>
+            <p className="text-5xl font-bold text-white mt-6 tracking-tight">{stats.newslettersBypassed}</p>
           </div>
 
           {isPro && (
             <div 
               onClick={() => onNavigate?.('followups')}
-              className="bg-surface-raised border border-surface-border rounded-xl p-6 shadow-glass-sm flex flex-col justify-between relative overflow-hidden group cursor-pointer hover:border-amber-500/50 transition-colors"
+              className="bg-black/40 backdrop-blur-xl border border-surface-border/50 rounded-2xl p-6 shadow-glass-sm flex flex-col justify-between relative overflow-hidden group cursor-pointer hover:border-amber-500/40 transition-all hover:shadow-[0_8px_30px_rgba(245,158,11,0.1)]"
             >
-              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-500">
                 <Mail size={48} className="text-amber-400" />
               </div>
-              <h3 className="text-sm font-medium text-gray-400">Needs Follow-up</h3>
-              <div className="mt-4 flex items-baseline gap-2">
-                <p className="text-4xl font-semibold text-white">{stats.followUps}</p>
-                <span className="text-xs text-amber-400 font-bold uppercase tracking-wider">Pro</span>
+              <h3 className="text-sm font-semibold text-gray-400 tracking-wide uppercase">Needs Follow-up</h3>
+              <div className="mt-6 flex items-baseline gap-2">
+                <p className="text-5xl font-bold text-white tracking-tight">{stats.followUps}</p>
+                <span className="text-[10px] bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded font-bold uppercase tracking-wider border border-amber-500/30">Pro</span>
               </div>
             </div>
           )}
         </div>
 
-        <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
-          <BarChart3 size={20} className="text-gray-400" /> Recent AI Activity
-        </h3>
-        
-        <div className="bg-surface-raised border border-surface-border rounded-xl overflow-hidden shadow-glass-sm">
+        <h3 className="text-xl font-bold text-white mb-6 tracking-tight">Recent Classifications</h3>
+        <div className="bg-black/40 backdrop-blur-xl border border-surface-border/50 rounded-2xl shadow-glass overflow-hidden">
           {recent.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">No recent activity</div>
+            <div className="p-12 text-center text-gray-500 font-medium">No recent emails classified yet.</div>
           ) : (
             <ul className="divide-y divide-surface-border">
               {recent.map((msg) => (
